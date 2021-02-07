@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Button, TextField } from '@material-ui/core';
 import './App.css';
 
 function App() {
+  const [todos, setTodos] = useState([''])
+  const [input, setInput] = useState('')
+
+  const addTodo = (event:any) => {
+    event.preventDefault()
+    if(input !== ''){
+      setTodos([...todos, input])
+      setInput('')
+    }return
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello world</h1>
+      <form>
+      <TextField value={input} onChange={event => setInput(event.target.value)} id="outlined-basic" variant="outlined" size="small"/>
+      <Button type='submit' onClick={addTodo} variant="outlined" color="primary">Add Todo</Button>
+      {todos.map(i => <li>{i}</li>)}
+      </form>
     </div>
   );
 }

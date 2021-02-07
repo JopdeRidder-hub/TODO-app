@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
-import './App.css';
+import React, { useState } from "react";
+import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
+import "./App.css";
+import Todo from "./components/Todo";
 
 function App() {
-  const [todos, setTodos] = useState([''])
-  const [input, setInput] = useState('')
+  const [todos, setTodos] = useState([""]);
+  const [input, setInput] = useState("");
 
-  const addTodo = (event:any) => {
-    event.preventDefault()
-    if(input !== ''){
-      setTodos([...todos, input])
-      setInput('')
-    }return
-  }
+  const addTodo = (event: any) => {
+    event.preventDefault();
+    setTodos([...todos, input]);
+    setInput("");
+  };
   return (
     <div className="App">
-      <h1>Hello world</h1>
+      <h1>Todo app</h1>
       <form>
-      <TextField value={input} onChange={event => setInput(event.target.value)} id="outlined-basic" variant="outlined" size="small"/>
-      <Button type='submit' onClick={addTodo} variant="outlined" color="primary">Add Todo</Button>
-      {todos.map(i => <li>{i}</li>)}
+        <FormControl>
+          <InputLabel>What is on your todo</InputLabel>
+          <Input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </FormControl>
+        <Button
+          disabled={!input}
+          type="submit"
+          onClick={addTodo}
+          variant="outlined"
+          color="primary"
+        >
+          Add Todo
+        </Button>
+        <Todo todos={todos} />
       </form>
     </div>
   );

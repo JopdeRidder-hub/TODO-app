@@ -1,19 +1,12 @@
 import React from "react";
-import { List, ListItem } from "@material-ui/core";
+import "../App.css";
 
 function Todo(props: any) {
   return (
-    <List>
-      <ListItem>
-        {props.todos
-          .filter((todo: string) => todo !== "")
-          .map((todo: string) => (
-            <div>
-              <li>{todo}</li>
-            </div>
-          ))}
-      </ListItem>
-    </List>
+    <div>
+      <div>{props.todos.todo}</div>
+      <button>DELETE ME</button>
+    </div>
   );
 }
 

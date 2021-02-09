@@ -50,7 +50,7 @@ function App() {
           Add Todo
         </Button>
         {todos.map((todo) => (
-          <Todo todos={todo} />
+          <Todo todo={todo} />
         ))}
       </form>
     </div>

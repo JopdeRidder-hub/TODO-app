@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
+import { Button, FormControl, TextField } from "@material-ui/core";
 import "./App.css";
 import Todo from "./components/Todo";
 import { db } from "./firebase";
 import firebase from "firebase";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 
 function App() {
   const [todos, setTodos] = useState<Array<Object>>([]);
@@ -31,28 +33,40 @@ function App() {
   };
   return (
     <div className="App">
-      <h1>Todo app</h1>
-      <form>
-        <FormControl>
-          <InputLabel>What is on your todo</InputLabel>
-          <Input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-          />
-        </FormControl>
-        <Button
-          disabled={!input}
-          type="submit"
-          onClick={addTodo}
-          variant="outlined"
-          color="primary"
-        >
-          Add Todo
-        </Button>
+      <div>
+        <Box component="span" display="block" p={1} m={1}>
+          <h1>Todo App</h1>
+        </Box>
+        <Box component="span" display="block" p={2} m={2}>
+          <form>
+            <Grid container justify="center">
+              <FormControl>
+                <TextField
+                  label="Add your todo"
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  variant="outlined"
+                />
+              </FormControl>
+              <Button
+                disabled={!input}
+                type="submit"
+                onClick={addTodo}
+                variant="outlined"
+                color="primary"
+                size="large"
+              >
+                Add Todo
+              </Button>
+            </Grid>
+          </form>
+        </Box>
+      </div>
+      <div>
         {todos.map((todo) => (
           <Todo todo={todo} />
         ))}
-      </form>
+      </div>
     </div>
   );
 }
